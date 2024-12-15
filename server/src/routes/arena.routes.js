@@ -25,13 +25,12 @@ router.route("/update-arena/:id").patch(updateArenaDetails);
 
 router
   .route("/arena-image/:id")
-    .patch(upload.single("arenaImage"), updateArenaImage);
-  
+  .patch(upload.single("arenaImage"), updateArenaImage);
+
 router.route("/delete-arena/:id").delete(deleteArena);
 
 router.route("/list-of-arenas").get(getAllArenas);
 
 router.route("/current-arena-details/:id").get(currentArenaDetails);
-
 
 export default router;

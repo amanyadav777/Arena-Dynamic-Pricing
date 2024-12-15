@@ -19,9 +19,11 @@ app.use(cookieParser());
 
 //routes import
 import arenaRouter from './routes/arena.routes.js'
+import dynamicPricingRouter from './routes/dynamicPricing.routes.js'
 
 
 //routes declaration
 app.use("/api/v1/arena", arenaRouter)
+app.use("/api/v1/dynamic-pricing", dynamicPricingRouter);
 
 export { app };

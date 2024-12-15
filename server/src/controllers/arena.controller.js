@@ -3,7 +3,6 @@ import { ApiError } from "../utils/ApiError.js";
 import { Arena } from "../models/arena.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import mongoose from "mongoose";
 
 const createArena = asyncHandler(async (req, res) => {
   const { name, originalPricing } = req.body;
@@ -195,7 +194,7 @@ const currentArenaDetails = asyncHandler(async (req, res) => {
     
   return res
     .status(200)
-    .json(new ApiResponse(200, arena, "Arenas Details fetched successfully"));
+    .json(new ApiResponse(200, arena, "Arena Details fetched successfully"));
 });
 
 export {

@@ -14,6 +14,7 @@ const dynamicPricingSchema = new Schema({
     type: String,
     default: "N/A",
     trim: true,
+    uppercase: true,
   },
   startTime: {
     type: String,
