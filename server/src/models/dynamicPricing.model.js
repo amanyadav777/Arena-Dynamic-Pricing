@@ -26,6 +26,11 @@ const dynamicPricingSchema = new Schema({
     required: true,
     trim: true,
   },
+  duration: {
+    type: String,
+    default: "all",
+    trim: true,
+  },
   priceChange: {
     type: String,
     required: true,

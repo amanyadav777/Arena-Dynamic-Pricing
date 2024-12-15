@@ -6,12 +6,13 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { checkTimeValidity } from "../utils/extraFunctions.js";
 
 const createDynamicPricingArena = asyncHandler(async (req, res) => {
-    let { arenaId, date, day, startTime, endTime, price } = req.body;
+    let { arenaId, date, day, startTime, endTime, price, duration } = req.body;
     date=date?.trim();
     day=day?.trim();
     day=day?.toUpperCase();
     startTime=startTime?.trim();
     endTime=endTime?.trim();
+    duration = duration?.trim();
 
   if (!arenaId) {
     throw new ApiError(400, "Arena ID is required.");
@@ -108,6 +109,7 @@ const createDynamicPricingArena = asyncHandler(async (req, res) => {
     day: day.toUpperCase(),
     startTime,
     endTime,
+    duration,
   });
 
   if (existedDynamicPricingArena) {
@@ -124,6 +126,7 @@ const createDynamicPricingArena = asyncHandler(async (req, res) => {
     startTime,
     endTime,
     priceChange: price,
+    duration,
   });
 
   const createdDynamicPricingArena = await DynamicPricing.findById(
@@ -153,12 +156,13 @@ const updateDynamicPricingArenaDetails = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Arena ID is required.");
   }
 
-    let { date, day, startTime, endTime, price } = req.body;
+    let { date, day, startTime, endTime, price, duration } = req.body;
     date = date?.trim();
     day = day?.trim();
     day = day?.toUpperCase();
     startTime = startTime?.trim();
     endTime = endTime?.trim();
+    duration = duration?.trim();
 
   // Find the arena by ID
   const dynamicPricingArena = await DynamicPricing.findById(id);
@@ -258,6 +262,11 @@ const updateDynamicPricingArenaDetails = asyncHandler(async (req, res) => {
       throw new ApiError(400, "startTime must be before endTime.");
     }
     dynamicPricingArena.endTime = endTime;
+  }
+  
+  // for duration
+  if (duration) {
+    dynamicPricingArena.duration = duration;
   }
 
   // Save the updated arena

@@ -25,6 +25,7 @@ router
 
 router
   .route("/get-arena-dynamic-pricing-list/:arenaId")
-  .get(getArenaDynamicPricingList);
+    .get(getArenaDynamicPricingList);
+  
 
 export default router;

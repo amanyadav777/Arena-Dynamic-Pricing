@@ -5,7 +5,8 @@ import {
   deleteArena,
   updateArenaImage,
   getAllArenas,
-  currentArenaDetails,
+  orginalArenaDetails,
+  getArenaDetails,
 } from "../controllers/arena.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 
@@ -31,6 +32,8 @@ router.route("/delete-arena/:id").delete(deleteArena);
 
 router.route("/list-of-arenas").get(getAllArenas);
 
-router.route("/current-arena-details/:id").get(currentArenaDetails);
+router.route("/original-arena-details/:id").get(orginalArenaDetails);
+
+router.route("/get-arean-details/:id").get(getArenaDetails);
 
 export default router;
