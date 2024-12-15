@@ -26,7 +26,7 @@ const arenaSchema = new Schema(
       type: [pricingSchema],
       default: [],
     },
-    image: {
+    imageUrl: {
       type: String, // cloudinary url
       default:
         "https://d26itsb5vlqdeq.cloudfront.net//image/84F6C802-D425-AC69-FF763C55B14E2430",

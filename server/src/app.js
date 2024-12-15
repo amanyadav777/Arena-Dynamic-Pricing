@@ -17,4 +17,11 @@ app.use(express.static("public"));
 app.use(cookieParser());
 
 
+//routes import
+import arenaRouter from './routes/arena.routes.js'
+
+
+//routes declaration
+app.use("/api/v1/arena", arenaRouter)
+
 export { app };
