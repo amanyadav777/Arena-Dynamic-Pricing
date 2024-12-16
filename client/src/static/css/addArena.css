@@ -1,0 +1,67 @@
+.add-arena {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+  padding: 1rem;
+}
+
+.add-arena-heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.add-arena-main-content {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-evenly;
+  margin: 1rem 0rem;
+}
+
+.add-arena-main-content-image {
+  width: 300px;
+  height: 200px;
+  border: 1px dashed #aaa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0rem;
+}
+
+.add-arena-main-content-add-new-button {
+  padding: 8px 12px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+}
+
+.cross-button {
+  background: transparent;
+  border: none;
+  color: red;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.add-arena-button {
+  margin: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-arena-create-button {
+  padding: 0.7rem 1.3rem;
+  font-size: 1.2rem;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  width: 50%;
+}
