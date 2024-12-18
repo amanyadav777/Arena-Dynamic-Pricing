@@ -42,16 +42,17 @@
 .arena-card-button {
   padding: 10px;
   font-size: 0.9rem;
-  border: 1px solid #888;
+  border: none;
   border-radius: 5px;
   background-color: #f0f0f0;
   color: #333;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .arena-card-btn-original {
-  background-color: #ffe4b5;
+  background-color: #add8e6;
 }
 
 .arena-card-btn-dynamic-all {
@@ -59,15 +60,16 @@
 }
 
 .arena-card-btn-create {
-  background-color: #90ee90;
+  background-color: #add8e6;
 }
 
 .arena-card-btn-book {
-  background-color: #ffcccb;
+  color: white;
+  background-color: #007bff;
 }
 
 .arena-card-btn-original:hover {
-  background-color: #fbc15d;
+  background-color: #59c1e3;
 }
 
 .arena-card-btn-dynamic-all:hover {
@@ -75,9 +77,16 @@
 }
 
 .arena-card-btn-create:hover {
-  background-color: #4de94d;
+  background-color: #59c1e3;
 }
 
 .arena-card-btn-book:hover {
-  background-color: #f97875;
+  background-color: #0056b3;
 }
+
+
+/* @media (max-width: 768px) {
+  .arena-card-container {
+    width: 100%;
+  }
+} */

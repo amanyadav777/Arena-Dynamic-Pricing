@@ -69,7 +69,7 @@ const AddDynamicPricing = () => {
     } catch (error) {
       // Error handling
       console.error("Error creating arena:", error.response || error.message);
-      toast.error("Failed to create arena. Please try again.");
+      toast.error(error.response.data.message || error.message);
     }
   };
   

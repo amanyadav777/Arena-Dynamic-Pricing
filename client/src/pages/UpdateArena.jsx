@@ -20,7 +20,7 @@ const UpdateArena = () => {
       } catch (error) {
         // Error handling
         console.error("Error:", error.response || error.message);
-        toast.error("Failed to load arena details. Please try again.");
+        toast.error(error.response.data.message || error.message);
       }
     };
     
@@ -47,8 +47,9 @@ const UpdateArena = () => {
             }
         } catch (error) {
           // Error handling
+          // console.log(error);
           console.error("Error creating arena:", error.response || error.message);
-          toast.error("Error in updating arena details. Please try again.");
+          toast.error(error.response.data.message || error.message);
         }
     };
     

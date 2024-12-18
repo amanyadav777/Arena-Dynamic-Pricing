@@ -20,13 +20,13 @@ const Home = () => {
         }
       } catch (error) {
         console.error("Error:", error.response || error.message);
-        toast.error("Failed to load arena details. Please try again.");
+        toast.error(error.response.data.message || error.message);
       }
     };
     
     useEffect(() => {
         getAllArena();
-      });
+      }, []);
     
     return (
       <div className="arena-home-container">

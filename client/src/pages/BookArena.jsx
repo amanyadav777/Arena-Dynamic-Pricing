@@ -31,7 +31,7 @@ const BookArena = () => {
       }
     } catch (error) {
       console.error("Error:", error.response || error.message);
-      toast.error("Failed to load arena details. Please try again.");
+      toast.error(error.response.data.message || error.message);
     }
   };
 
@@ -61,7 +61,7 @@ const BookArena = () => {
       }
     } catch (error) {
       console.error("Error:", error.response || error.message);
-      toast.error("Failed to load arena price. Please try again.");
+      toast.error(error.response.data.message || error.message);
     }
   };
 

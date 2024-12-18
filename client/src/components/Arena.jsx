@@ -149,10 +149,12 @@ const Arena = ({ mode, arenaData, onSubmit, onDelete, onUpdateImage }) => {
             ) : (
               mode !== "view" && (
                 <label>
-                      <div style={{
-                        display: "flex",
-                        justifyContent: "center",
-                  }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
                     <input
                       type="file"
                       style={{ display: "none" }}
@@ -309,7 +311,7 @@ const Arena = ({ mode, arenaData, onSubmit, onDelete, onUpdateImage }) => {
               Update
             </button>
             <button
-              className="add-arena-create-button"
+              className="add-arena-delete-button"
               onClick={() => onDelete(arenaData._id)}
             >
               Delete

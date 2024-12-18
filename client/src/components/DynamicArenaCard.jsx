@@ -22,7 +22,7 @@ const DynamicArenaCard = ({ dynamicArenaData }) => {
       }
     } catch (error) {
       console.error("Error:", error.response || error.message);
-      toast.error("Error deleting Dynamic arena. Please try again.");
+      toast.error(error.response.data.message || error.message);
     }
   };
   return (

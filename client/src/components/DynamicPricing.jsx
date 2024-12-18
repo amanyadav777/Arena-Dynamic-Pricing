@@ -12,6 +12,7 @@ const DynamicPricing = ({ mode, arenaData, onSubmit }) => {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [price, setPrice] = useState("");
+  const [errors, setErrors] = useState({});
   const today = new Date().toISOString().split("T")[0];
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const DynamicPricing = ({ mode, arenaData, onSubmit }) => {
         setDay(arenaData?.day);
         setSelectedOption("day-time");
       } else if (arenaData?.date !== "N/A" && arenaData?.day === "N/A") {
-          const [day, month, year] = arenaData?.date?.split("-");
+        const [day, month, year] = arenaData?.date?.split("-");
         setDate(`${year}-${month}-${day}`);
         setSelectedOption("date-time");
       }
@@ -54,28 +55,44 @@ const DynamicPricing = ({ mode, arenaData, onSubmit }) => {
     }
   };
 
+  const validateFields = () => {
+    const errors = {};
+    if (selectedOption === "date-time" && !date) {
+      errors.date = "Date is required.";
+    }
+    if (selectedOption === "day-time" && !day) {
+      errors.day = "Day is required.";
+    }
+    if (!startTime) {
+      errors.startTime = "Start time is required.";
+    }
+    if (!endTime) {
+      errors.endTime = "End time is required.";
+    }
+    if (price === "" || isNaN(price) || price < -1e9 || price > 1e9) {
+      errors.price = "Valid price is required.";
+    }
+
+    setErrors(errors);
+    return Object.keys(errors).length === 0; 
+  };
+
   const handleSubmit = () => {
-    // console.log("Form Data Submitted:", {
-    //     arenaName,
-    //     selectedDuration,
-    //     selectedOption,
-    //     date:date===""?"N/A":date,
-    //     day:day===""?"N/A":day,
-    //     startTime,
-    //     endTime,
-    //     price,
-    //   });
-      const data = {
-        arenaName,
-        selectedDuration,
-        selectedOption,
-        date: date === "" ? "N/A" : date,
-        day: day === "" ? "N/A" : day,
-        startTime,
-        endTime,
-        price,
-      };
-      onSubmit(data);
+    if (!validateFields()) {
+      return; // Stop submission if validation fails
+    }
+
+    const data = {
+      arenaName,
+      selectedDuration,
+      selectedOption,
+      date: date === "" ? "N/A" : date,
+      day: day === "" ? "N/A" : day,
+      startTime,
+      endTime,
+      price,
+    };
+    onSubmit(data);
   };
 
   return (
@@ -133,7 +150,9 @@ const DynamicPricing = ({ mode, arenaData, onSubmit }) => {
       {/* Dynamic Form Rendering */}
       {selectedOption === "date-time" && (
         <div className="dynamic-pricing-fields">
-          <label>Date</label>
+          <label>
+            Date<span className="book-arena-required"> *</span>
+          </label>
           <input
             type="date"
             name="date"
@@ -143,26 +162,35 @@ const DynamicPricing = ({ mode, arenaData, onSubmit }) => {
             onChange={(e) => setDate(e.target.value)}
             onKeyDown={(e) => e.preventDefault()}
           />
-          <label>Start Time</label>
+          {errors.date && <p className="error-text">{errors.date}</p>}
+          <label>
+            Start Time <span className="book-arena-required"> *</span>
+          </label>
           <input
             type="time"
             name="startTime"
             value={startTime}
             onChange={(e) => setStartTime(e.target.value)}
           />
-          <label>End Time</label>
+          {errors.startTime && <p className="error-text">{errors.startTime}</p>}
+          <label>
+            End Time <span className="book-arena-required"> *</span>
+          </label>
           <input
             type="time"
             name="endTime"
             value={endTime}
             onChange={(e) => setEndTime(e.target.value)}
           />
+          {errors.endTime && <p className="error-text">{errors.endTime}</p>}
         </div>
       )}
 
       {selectedOption === "day-time" && (
         <div className="dynamic-pricing-fields">
-          <label>Day</label>
+          <label>
+            Day <span className="book-arena-required"> *</span>
+          </label>
           <select
             name="day"
             value={day}
@@ -183,45 +211,60 @@ const DynamicPricing = ({ mode, arenaData, onSubmit }) => {
               </option>
             ))}
           </select>
-          <label>Start Time</label>
+          {errors.day && <p className="error-text">{errors.day}</p>}
+          <label>
+            Start Time<span className="book-arena-required"> *</span>
+          </label>
           <input
             type="time"
             name="startTime"
             value={startTime}
             onChange={(e) => setStartTime(e.target.value)}
           />
-          <label>End Time</label>
+          {errors.startTime && <p className="error-text">{errors.startTime}</p>}
+          <label>
+            End Time<span className="book-arena-required"> *</span>
+          </label>
           <input
             type="time"
             name="endTime"
             value={endTime}
             onChange={(e) => setEndTime(e.target.value)}
           />
+          {errors.endTime && <p className="error-text">{errors.endTime}</p>}
         </div>
       )}
 
       {selectedOption === "time-only" && (
         <div className="dynamic-pricing-fields">
-          <label>Start Time</label>
+          <label>
+            Start Time<span className="book-arena-required"> *</span>
+          </label>
           <input
             type="time"
             name="startTime"
             value={startTime}
             onChange={(e) => setStartTime(e.target.value)}
           />
-          <label>End Time</label>
+          {errors.startTime && <p className="error-text">{errors.startTime}</p>}
+          <label>
+            End Time<span className="book-arena-required"> *</span>
+          </label>
           <input
             type="time"
             name="endTime"
             value={endTime}
             onChange={(e) => setEndTime(e.target.value)}
           />
+          {errors.endTime && <p className="error-text">{errors.endTime}</p>}
         </div>
       )}
 
       {/* Price Input */}
       <div className="dynamic-pricing-field">
-        <label>Price</label>
+        <label>
+          Price<span className="book-arena-required"> *</span>
+        </label>
         <input
           type="number"
           name="price"
@@ -229,6 +272,7 @@ const DynamicPricing = ({ mode, arenaData, onSubmit }) => {
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
+        {errors.price && <p className="error-text">{errors.price}</p>}
       </div>
 
       {/* Submit Button */}

@@ -69,6 +69,8 @@ const createArena = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, createdArena, "Arena created Successfully"));
 });
 
+
+// TODO: be caution about updating name
 const updateArenaDetails = asyncHandler(async (req, res) => {
   const { id } = req.params; // get arena id from params
 
@@ -77,7 +79,7 @@ const updateArenaDetails = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Arena ID is required.");
   }
 
-  const { name, originalPricing } = req.body;
+  let { name, originalPricing } = req.body;
 
   // Find the arena by ID
   const arena = await Arena.findById(id);
@@ -88,6 +90,12 @@ const updateArenaDetails = asyncHandler(async (req, res) => {
 
   // Update the fields if they are provided in the request body
   if (name?.trim()) {
+    name = name.toUpperCase();
+    const existingArena = await Arena.findOne({ "name": name });
+    // console.log(existingArena, existingArena?.id, id);
+    if (existingArena && existingArena.id !== id) {
+      throw new ApiError(400, "Name with this arena already Exists!.");
+    }
     arena.name = name.trim();
   }
 
@@ -294,7 +302,7 @@ const getArenaDetails = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Arena not found, Invalid arena ID.");
   }
   
-  console.log(req)
+  // console.log(req)
   let { date, startTime, duration } = req.query;
   // console.log(date, startTime, duration);
 

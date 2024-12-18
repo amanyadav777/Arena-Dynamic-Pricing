@@ -1,11 +1,9 @@
 /* Container Styling */
 .dynamic-arena-card-container {
   width: 350px;
-  border: 2px solid #ccc;
   border-radius: 10px;
   padding: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   background-color: #fdfdfd;
   text-align: center;
 }
@@ -34,6 +32,7 @@
 .dynamic-arena-card-details {
   text-align: left;
   margin-bottom: 10px;
+  padding: 0.5rem;
 }
 
 .dynamic-arena-card-row {
@@ -54,7 +53,7 @@
 /* Buttons Styling */
 .dynamic-arena-card-buttons {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin-top: 10px;
 }
 
@@ -68,19 +67,27 @@
 }
 
 .dynamic-arena-card-update {
-  background-color: #4caf50;
+  background-color: #007bff;
   color: white;
+  width: 45%;
 }
 
 .dynamic-arena-card-update:hover {
-  background-color: #45a049;
+  background-color: #0056b3;
 }
 
 .dynamic-arena-card-delete {
   background-color: #f44336;
   color: white;
+  width: 45%;
 }
 
 .dynamic-arena-card-delete:hover {
   background-color: #e53935;
 }
+
+/* @media (max-width: 600px) {
+  .dynamic-arena-card-container {
+    width: 100%;
+  }
+} */

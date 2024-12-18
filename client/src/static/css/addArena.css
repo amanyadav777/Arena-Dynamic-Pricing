@@ -145,7 +145,7 @@
 }
 
 .add-arena-create-button {
-  background-color: #5A6C57;
+  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -157,7 +157,23 @@
 }
 
 .add-arena-create-button:hover {
-  background-color: #525B44;
+  background-color: #0056b3;
+}
+
+.add-arena-delete-button{
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  width: 50%;
+}
+
+.add-arena-delete-button:hover {
+  background-color: #e53935;
 }
 
 /* Responsive Design */

@@ -22,19 +22,20 @@ const DynamicPricingHome = () => {
       }
     } catch (error) {
       console.error("Error:", error.response || error.message);
-      toast.error("Failed to load arena details. Please try again.");
+      toast.error(error.response.data.message || error.message);
     }
   };
 
   useEffect(() => {
     getAllDynamicArena();
-  });
+  },[]);
 
   return (
-    dynamicArenaList &&
-    dynamicArenaList.map((dynamicArena, index) => (
+    <div className="arena-home-container">
+      {dynamicArenaList && dynamicArenaList.map((dynamicArena, index) => (
       <DynamicArenaCard key={index} dynamicArenaData={dynamicArena} />
-    ))
+      ))}
+    </div>
   );
 };
 

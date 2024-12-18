@@ -21,7 +21,7 @@ const UpdateDynamicPricing = () => {
     } catch (error) {
       // Error handling
       console.error("Error:", error.response || error.message);
-      toast.error("Failed to load arena details. Please try again.");
+      toast.error(error.response.data.message || error.message);
     }
   };
 
@@ -73,7 +73,7 @@ const UpdateDynamicPricing = () => {
           "Error in updating Dynamic arena details:",
           error.response || error.message
         );
-        toast.error("Error in updating Dynamic arena details. Please try again.");
+        toast.error(error.response.data.message || error.message);
       }
   };
 

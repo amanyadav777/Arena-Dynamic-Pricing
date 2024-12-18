@@ -81,8 +81,14 @@
   margin: 16px; 
 }
 
-@media (max-width: 768px) {
-  .arena-card {
-    width: 100%;
-  }
+/* Dynamic Arena Home Css */
+
+.dynamic-arena-home-container {
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 16px; 
+  justify-content: space-around;
+  align-items: flex-start;
+  margin: 16px; 
 }
+

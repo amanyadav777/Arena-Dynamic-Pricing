@@ -20,7 +20,7 @@ const ViewArenaDetails = () => {
     } catch (error) {
       // Error handling
       console.error("Error:", error.response || error.message);
-      toast.error("Failed to load arena details. Please try again.");
+      toast.error(error.response.data.message || error.message);
     }
   };
 
@@ -43,7 +43,7 @@ const ViewArenaDetails = () => {
         
     } catch (error) {
       console.error("Error:", error.response || error.message);
-      toast.error("Error deleting arena. Please try again.");
+      toast.error(error.response.data.message || error.message);
     }
   };
 
