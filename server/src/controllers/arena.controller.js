@@ -124,6 +124,7 @@ const deleteArena = asyncHandler(async (req, res) => {
 
   // Find the arena by ID and delete it
   const arena = await Arena.findByIdAndDelete(id);
+  const result = await DynamicPricing.deleteMany({ arenaDetails: id });
 
   if (!arena) {
     throw new ApiError(404, "Arena not found.");
@@ -204,7 +205,7 @@ const calculatePriceChange = async (date, day, startTime, duration) => {
   // 2. day and time
   // 3. time
   // 4. original price
-  
+
   // console.log(date,day,startTime);
 
   const conditions = [
@@ -214,7 +215,7 @@ const calculatePriceChange = async (date, day, startTime, duration) => {
         { date },
         { day: "N/A" },
         { startTime: { $lte: startTime } },
-        { endTime: { $gt: startTime } },
+        { endTime: { $gte: startTime } },
         { duration },
       ],
     },
@@ -224,7 +225,7 @@ const calculatePriceChange = async (date, day, startTime, duration) => {
         { date },
         { day: "N/A" },
         { startTime: { $lte: startTime } },
-        { endTime: { $gt: startTime } },
+        { endTime: { $gte: startTime } },
         { duration: "all" },
       ],
     },
@@ -233,7 +234,7 @@ const calculatePriceChange = async (date, day, startTime, duration) => {
         { date: "N/A" },
         { day },
         { startTime: { $lte: startTime } },
-        { endTime: { $gt: startTime } },
+        { endTime: { $gte: startTime } },
         { duration },
       ],
     },
@@ -242,7 +243,7 @@ const calculatePriceChange = async (date, day, startTime, duration) => {
         { date: "N/A" },
         { day },
         { startTime: { $lte: startTime } },
-        { endTime: { $gt: startTime } },
+        { endTime: { $gte: startTime } },
         { duration: "all" },
       ],
     },
@@ -251,7 +252,7 @@ const calculatePriceChange = async (date, day, startTime, duration) => {
         { date: "N/A" },
         { day: "N/A" },
         { startTime: { $lte: startTime } },
-        { endTime: { $gt: startTime } },
+        { endTime: { $gte: startTime } },
         { duration },
       ],
     },
@@ -260,18 +261,18 @@ const calculatePriceChange = async (date, day, startTime, duration) => {
         { date: "N/A" },
         { day: "N/A" },
         { startTime: { $lte: startTime } },
-        { endTime: { $gt: startTime } },
+        { endTime: { $gte: startTime } },
         { duration: "all" },
       ],
     },
   ];
-
-  const pricingRules = await DynamicPricing.find({ $or: conditions })
-    .sort({ price: -1 }) // Sort by price in descending order
-    .exec();
+  const pricingRules = await DynamicPricing.find({ $or: conditions }).exec();
 
   // Return the first matched rule based on precedence
   if (pricingRules.length > 0) {
+    pricingRules.sort(
+      (a, b) => parseFloat(b.priceChange) - parseFloat(a.priceChange)
+    );
     return pricingRules[0].priceChange;
   }
 
@@ -292,14 +293,17 @@ const getArenaDetails = asyncHandler(async (req, res) => {
   if (!arena) {
     throw new ApiError(404, "Arena not found, Invalid arena ID.");
   }
-
-  let { date, startTime, duration } = req.body;
+  
+  console.log(req)
+  let { date, startTime, duration } = req.query;
+  // console.log(date, startTime, duration);
 
   date = date?.trim();
   startTime = startTime?.trim();
+  duration = duration?.trim();
 
-  if (!startTime || !date) {
-    throw new ApiError(400, "Date and Start Time is required");
+  if (!startTime || !date || !duration) {
+    throw new ApiError(400, "Date, Start Time and Duration is required");
   }
 
   let todayDay = "";
@@ -341,13 +345,38 @@ const getArenaDetails = asyncHandler(async (req, res) => {
     }
   }
 
-  const priceToChange = await calculatePriceChange(date, todayDay, startTime, duration);
+  if (startTime && !checkTimeValidity(startTime)) {
+    throw new ApiError(400, "Invalid startTime format. Use HH:mm.");
+  }
+
+  const durationRegex = /^\d+\smins$/;
+  if (duration && !durationRegex.test(duration)) {
+    throw new ApiError(400, "Duration must be 'X mins'");
+  }
+
+  const priceToChange = await calculatePriceChange(
+    date,
+    todayDay,
+    startTime,
+    duration
+  );
+
+  let arenaPrice = "0";
+  arena.originalPricing.map((pricing) => {
+    if (pricing.duration === duration) {
+      arenaPrice = pricing.price;
+      return;
+    }
+  });
+
+  const response = {
+    amount: parseFloat(arenaPrice) + parseFloat(priceToChange),
+    message: "something",
+  };
 
   return res
     .status(200)
-    .json(
-      new ApiResponse(200, priceToChange, "Arena Details fetched successfully")
-    );
+    .json(new ApiResponse(200, response, "Arena Details fetched successfully"));
 });
 
 export {

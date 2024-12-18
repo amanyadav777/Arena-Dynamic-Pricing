@@ -88,12 +88,12 @@ const Arena = ({ mode, arenaData, onSubmit, onDelete, onUpdateImage }) => {
       const formData = new FormData();
       formData.append("name", arenaName);
       if (image) formData.append("arenaImage", image);
-        formData.append("originalPricing", JSON.stringify(durationPricePairs));
-        if (mode === "update") {
-            onSubmit(arenaName, durationPricePairs);
-        } else {
-            onSubmit(formData);
-        }
+      formData.append("originalPricing", JSON.stringify(durationPricePairs));
+      if (mode === "update") {
+        onSubmit(arenaName, durationPricePairs);
+      } else {
+        onSubmit(formData);
+      }
     }
   };
 
@@ -113,35 +113,13 @@ const Arena = ({ mode, arenaData, onSubmit, onDelete, onUpdateImage }) => {
         {/* Image Section */}
         <div className="add-arena-main-content-left">
           <label className="s2">Image</label>
-          <div
-            className="add-arena-main-content-image"
-            style={{ position: "relative", width: "150px", height: "150px" }}
-          >
+          <div className="add-arena-main-content-image">
             {existingImageUrl && !image ? (
               <>
-                <div>
-                  <img
-                    src={existingImageUrl}
-                    alt="Arena"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      borderRadius: "8px",
-                    }}
-                  />
+                <div style={{ display: "flex" }}>
+                  <img src={existingImageUrl} alt="Arena" />
                   {mode === "update" && (
-                    <IoIosCloseCircle
-                      onClick={handleImageRemove}
-                      style={{
-                        position: "absolute",
-                        top: "-10px",
-                        right: "-10px",
-                        color: "red",
-                        fontSize: "1.5rem",
-                        cursor: "pointer",
-                      }}
-                    />
+                    <IoIosCloseCircle onClick={handleImageRemove} />
                   )}
                 </div>
                 {mode === "update" && (
@@ -155,28 +133,9 @@ const Arena = ({ mode, arenaData, onSubmit, onDelete, onUpdateImage }) => {
               </>
             ) : image ? (
               <>
-                <div>
-                  <img
-                    src={URL.createObjectURL(image)}
-                    alt="Arena"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      borderRadius: "8px",
-                    }}
-                  />
-                  <IoIosCloseCircle
-                    onClick={handleImageRemove}
-                    style={{
-                      position: "absolute",
-                      top: "-10px",
-                      right: "-10px",
-                      color: "red",
-                      fontSize: "1.5rem",
-                      cursor: "pointer",
-                    }}
-                  />
+                <div style={{ display: "flex" }}>
+                  <img src={URL.createObjectURL(image)} alt="Arena" />
+                  <IoIosCloseCircle onClick={handleImageRemove} />
                 </div>
                 {mode === "update" && (
                   <button
@@ -190,13 +149,16 @@ const Arena = ({ mode, arenaData, onSubmit, onDelete, onUpdateImage }) => {
             ) : (
               mode !== "view" && (
                 <label>
-                  <div>
+                      <div style={{
+                        display: "flex",
+                        justifyContent: "center",
+                  }}>
                     <input
                       type="file"
                       style={{ display: "none" }}
                       onChange={handleImageUpload}
                     />
-                    <span style={{ cursor: "pointer", fontSize: "4rem" }}>
+                    <span>
                       <IoMdAddCircleOutline />
                     </span>
                   </div>
@@ -216,17 +178,12 @@ const Arena = ({ mode, arenaData, onSubmit, onDelete, onUpdateImage }) => {
 
         <div className="add-arena-main-content-right">
           {/* Arena Name */}
-          <div style={{ marginBottom: "20px" }}>
+          <div>
             <label>
-              Arena Name<span style={{ color: "red" }}> *</span>
+              Arena Name<span className="red-color"> *</span>
             </label>
             <br />
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
+            <div className="df fd-c">
               <input
                 type="text"
                 value={arenaName}
@@ -248,20 +205,23 @@ const Arena = ({ mode, arenaData, onSubmit, onDelete, onUpdateImage }) => {
           {/* Duration and Price */}
           <div>
             <label>
-              Duration and Price<span style={{ color: "red" }}> *</span>
+              Duration and Price<span className="red-color"> *</span>
             </label>
-            <div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
               {durationPricePairs.map((pair, index) => (
                 <div
+                  style={{
+                    display: "flex",
+                    alignItems: "baseline",
+                  }}
                   key={index}
-                  style={{ display: "flex", marginBottom: "10px" }}
                 >
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
+                  <div className="df fd-c">
                     <input
                       type="text"
                       name="duration"
@@ -283,12 +243,7 @@ const Arena = ({ mode, arenaData, onSubmit, onDelete, onUpdateImage }) => {
                       </span>
                     )}
                   </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
+                  <div className="df fd-c">
                     <input
                       type="text"
                       name="price"

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { SidebarData } from "./SideBarData.js";
 import "./sidebar.css";
 import { IconContext } from "react-icons";
+import { CgProfile } from "react-icons/cg";
 
 const Sidebar = ()=>{
   const [sidebar, setSidebar] = useState(false);
@@ -18,6 +19,7 @@ const Sidebar = ()=>{
           <Link to="#" className="menu-bars">
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
+          <CgProfile className="profile-icon" />
         </div>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items" onClick={showSidebar}>

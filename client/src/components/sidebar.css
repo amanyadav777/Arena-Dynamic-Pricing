@@ -7,7 +7,7 @@
 .navbar {
   height: 80px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   background-color: var(--bg-color);
 }
@@ -15,6 +15,12 @@
 .menu-bars {
   margin-left: 2rem;
   font-size: 2rem;
+  background: none;
+}
+
+.profile-icon{
+  margin-right: 2rem;
+  font-size: 3rem;
   background: none;
 }
 

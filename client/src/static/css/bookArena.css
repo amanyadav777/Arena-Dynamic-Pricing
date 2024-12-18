@@ -1,0 +1,187 @@
+/* Container */
+.book-arena-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+.book-arena-header {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+/* Content Section */
+.book-arena-content {
+  display: flex;
+  gap: 2rem;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+}
+
+.book-arena-image-wrapper {
+  flex: 1;
+}
+
+.book-arena-image {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Details Section */
+.book-arena-details {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.book-arena-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Input Fields */
+.book-arena-input-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.book-arena-label {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.3rem;
+}
+
+.book-arena-input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+}
+
+.book-arena-input:focus {
+  border-color: #007bff;
+}
+
+/* Dynamic Pricing Section */
+.book-arena-dynamic-pricing {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.book-arena-duration-title {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.book-arena-chips-wrapper {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.book-arena-chip {
+  padding: 0.5rem 1rem;
+  border: 1px solid #007bff;
+  border-radius: 50px;
+  cursor: pointer;
+  background-color: #fff;
+  color: #007bff;
+  font-size: 0.9rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.book-arena-chip-active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.book-arena-chip:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.book-arena-check-amount {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.book-arena-check-amount:hover {
+  background-color: #218838;
+}
+
+/* Total Amount Display */
+.book-arena-amount {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #28a745;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+/* Book Now Button */
+.book-arena-book-now {
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.book-arena-book-now:hover {
+  background-color: #0056b3;
+}
+
+.book-arena-required {
+  color: red;
+}
+
+.book-arena-error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+
+.book-arena-check-amount:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.book-arena-check-amount {
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.book-arena-check-amount:hover:enabled {
+  background-color: #0056b3;
+}
+

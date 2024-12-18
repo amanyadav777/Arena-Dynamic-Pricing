@@ -1,0 +1,94 @@
+.dynamic-pricing-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.dynamic-pricing-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.dynamic-pricing-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.dynamic-pricing-arena-name {
+  font-size: 1.5rem;
+}
+
+.dynamic-pricing-chips {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.chip-active {
+  background-color: #4caf50;
+  color: white;
+  border-color: #4caf50;
+}
+
+.dynamic-pricing-switcher {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.dynamic-pricing-switcher button {
+  padding: 8px 12px;
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dynamic-pricing-switcher .active {
+  background-color: #4caf50;
+  color: white;
+}
+
+.dynamic-pricing-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dynamic-pricing-field label {
+  font-weight: bold;
+}
+
+.dynamic-pricing-field input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.dynamic-pricing-submit {
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dynamic-pricing-submit:hover {
+  background-color: #45a049;
+}

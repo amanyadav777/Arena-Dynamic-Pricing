@@ -1,5 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
+:root {
+  --primary-color: #A294F9;
+  --secondary-color: #CDC1FF;
+  --light-secondary-color: #E5D9F2;
+  --background-color: #F5EFFF;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -53,4 +60,29 @@
 
 .mr2{
   margin-right: 2rem;
+}
+
+.df{
+  display: flex;
+}
+
+.fd-c{
+  flex-direction: column;
+}
+
+/* Arena Home Css */
+
+.arena-home-container {
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 16px; 
+  justify-content: space-around;
+  align-items: flex-start;
+  margin: 16px; 
+}
+
+@media (max-width: 768px) {
+  .arena-card {
+    width: 100%;
+  }
 }

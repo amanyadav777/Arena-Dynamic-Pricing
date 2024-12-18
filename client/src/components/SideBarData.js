@@ -16,10 +16,10 @@ export const SidebarData = [
     icon: <FaIcons.FaCartPlus />,
     cName: "nav-text",
   },
-  {
-    title: "Add Dynamic Pricing",
-    path: "/add-dynamic-pricing",
-    icon: <IoIcons.IoIosPaper />,
-    cName: "nav-text",
-  },
+  // {
+  //   title: "Add Dynamic Pricing",
+  //   path: "/add-dynamic-pricing",
+  //   icon: <IoIcons.IoIosPaper />,
+  //   cName: "nav-text",
+  // },
 ];

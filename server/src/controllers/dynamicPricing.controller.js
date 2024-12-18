@@ -6,13 +6,13 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { checkTimeValidity } from "../utils/extraFunctions.js";
 
 const createDynamicPricingArena = asyncHandler(async (req, res) => {
-    let { arenaId, date, day, startTime, endTime, price, duration } = req.body;
-    date=date?.trim();
-    day=day?.trim();
-    day=day?.toUpperCase();
-    startTime=startTime?.trim();
-    endTime=endTime?.trim();
-    duration = duration?.trim();
+  let { arenaId, date, day, startTime, endTime, price, duration } = req.body;
+  date = date?.trim();
+  day = day?.trim();
+  day = day?.toUpperCase();
+  startTime = startTime?.trim();
+  endTime = endTime?.trim();
+  duration = duration?.trim();
 
   if (!arenaId) {
     throw new ApiError(400, "Arena ID is required.");
@@ -156,13 +156,15 @@ const updateDynamicPricingArenaDetails = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Arena ID is required.");
   }
 
-    let { date, day, startTime, endTime, price, duration } = req.body;
-    date = date?.trim();
-    day = day?.trim();
-    day = day?.toUpperCase();
-    startTime = startTime?.trim();
-    endTime = endTime?.trim();
-    duration = duration?.trim();
+  let { date, day, startTime, endTime, price, duration, selectedOption } =
+    req.body;
+  date = date?.trim();
+  day = day?.trim();
+  day = day?.toUpperCase();
+  startTime = startTime?.trim();
+  endTime = endTime?.trim();
+  duration = duration?.trim();
+  selectedOption = selectedOption?.trim();
 
   // Find the arena by ID
   const dynamicPricingArena = await DynamicPricing.findById(id);
@@ -172,7 +174,7 @@ const updateDynamicPricingArenaDetails = asyncHandler(async (req, res) => {
   }
 
   // Update the fields if they are provided in the request body
-  if (date?.trim()) {
+  if (selectedOption === "date-time" && date?.trim()) {
     const dateRegex = /^\d{2}-\d{2}-\d{4}$/; // Matches DD-MM-YYYY
     if (!dateRegex.test(date.trim())) {
       throw new ApiError(400, "Invalid date format. Use DD-MM-YYYY.");
@@ -202,7 +204,7 @@ const updateDynamicPricingArenaDetails = asyncHandler(async (req, res) => {
   }
 
   // if day exists
-  if (day?.trim()) {
+  if (selectedOption === "day-time" && day?.trim()) {
     const validDays = [
       "MONDAY",
       "TUESDAY",
@@ -263,12 +265,20 @@ const updateDynamicPricingArenaDetails = asyncHandler(async (req, res) => {
     }
     dynamicPricingArena.endTime = endTime;
   }
-  
+
   // for duration
   if (duration) {
     dynamicPricingArena.duration = duration;
   }
 
+  if (selectedOption === "date-time") {
+    dynamicPricingArena.day = "N/A";
+  } else if (selectedOption === "day-time") {
+    dynamicPricingArena.date = "N/A";
+  } else {
+    dynamicPricingArena.day = "N/A";
+    dynamicPricingArena.date = "N/A";
+  }
   // Save the updated arena
   const updatedDynamicPricingArena = await dynamicPricingArena.save();
 
@@ -314,7 +324,7 @@ const getArenaDynamicPricingList = asyncHandler(async (req, res) => {
 
   const dynamicPricingArenas = await DynamicPricing.find({
     arenaDetails: arenaId,
-  });
+  }).populate("arenaDetails");
   return res
     .status(200)
     .json(
@@ -334,7 +344,9 @@ const getArenaDynamicPricingDetails = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Dynamic Pricing Arena ID is required.");
   }
   // Find the arena by ID
-  const dynamicPricingArena = await DynamicPricing.findById(id);
+  const dynamicPricingArena = await DynamicPricing.findById(id).populate(
+    "arenaDetails"
+  );
 
   if (!dynamicPricingArena) {
     throw new ApiError(404, "Dynamic Pricing Arena not found, Invalid ID.");

@@ -1,0 +1,83 @@
+.arena-card-container {
+  width: 400px;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  background-color: var(--background-color);
+}
+
+.arena-card-image {
+  width: 100%;
+  height: 150px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #555;
+  background-color: #f9f9f9;
+  margin-bottom: 15px;
+}
+
+.arena-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.arena-card-title {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.arena-card-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.arena-card-button {
+  padding: 10px;
+  font-size: 0.9rem;
+  border: 1px solid #888;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.arena-card-btn-original {
+  background-color: #ffe4b5;
+}
+
+.arena-card-btn-dynamic-all {
+  background-color: #add8e6;
+}
+
+.arena-card-btn-create {
+  background-color: #90ee90;
+}
+
+.arena-card-btn-book {
+  background-color: #ffcccb;
+}
+
+.arena-card-btn-original:hover {
+  background-color: #fbc15d;
+}
+
+.arena-card-btn-dynamic-all:hover {
+  background-color: #59c1e3;
+}
+
+.arena-card-btn-create:hover {
+  background-color: #4de94d;
+}
+
+.arena-card-btn-book:hover {
+  background-color: #f97875;
+}
