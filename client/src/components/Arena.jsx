@@ -118,7 +118,7 @@ const Arena = ({ mode, arenaData, onSubmit, onDelete, onUpdateImage }) => {
               <>
                 <div style={{ display: "flex" }}>
                   <img src={existingImageUrl} alt="Arena" />
-                  {mode === "update" && (
+                  {mode === "create" && (
                     <IoIosCloseCircle onClick={handleImageRemove} />
                   )}
                 </div>

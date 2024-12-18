@@ -255,33 +255,47 @@ const calculatePriceChange = async (date, day, startTime, duration) => {
         { duration: "all" },
       ],
     },
-    {
-      $and: [
-        { date: "N/A" },
-        { day: "N/A" },
-        { startTime: { $lte: startTime } },
-        { endTime: { $gte: startTime } },
-        { duration },
-      ],
-    },
-    {
-      $and: [
-        { date: "N/A" },
-        { day: "N/A" },
-        { startTime: { $lte: startTime } },
-        { endTime: { $gte: startTime } },
-        { duration: "all" },
-      ],
-    },
   ];
   const pricingRules = await DynamicPricing.find({ $or: conditions }).exec();
-
+  
+  // console.log(pricingRules)
   // Return the first matched rule based on precedence
   if (pricingRules.length > 0) {
     pricingRules.sort(
       (a, b) => parseFloat(b.priceChange) - parseFloat(a.priceChange)
     );
     return pricingRules[0].priceChange;
+  } else {
+    const newConditions = [
+      {
+        $and: [
+          { date: "N/A" },
+          { day: "N/A" },
+          { startTime: { $lte: startTime } },
+          { endTime: { $gte: startTime } },
+          { duration },
+        ],
+      },
+      {
+        $and: [
+          { date: "N/A" },
+          { day: "N/A" },
+          { startTime: { $lte: startTime } },
+          { endTime: { $gte: startTime } },
+          { duration: "all" },
+        ],
+      },
+    ];
+    const newPricingRules = await DynamicPricing.find({
+      $or: newConditions,
+    }).exec();
+
+    if (newPricingRules.length > 0) {
+      newPricingRules.sort(
+        (a, b) => parseFloat(b.priceChange) - parseFloat(a.priceChange)
+      );
+      return newPricingRules[0].priceChange;
+    }
   }
 
   // Default price change

@@ -3,9 +3,10 @@ import DynamicArenaCard from "../components/DynamicArenaCard";
 import axios from "axios";
 import { API_BASE_URL } from "../constants";
 import { toast } from "react-hot-toast";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const DynamicPricingHome = () => {
+  const navigate = useNavigate();
     const [dynamicArenaList, setDynamicArenaList] = useState(null);
     const { id } = useParams();
 
@@ -25,6 +26,10 @@ const DynamicPricingHome = () => {
       toast.error(error.response.data.message || error.message);
     }
   };
+  
+  const handleAddDynamicPricingNow = () => {
+    navigate(`/add-dynamic-pricing/${id}`);
+  };
 
   useEffect(() => {
     getAllDynamicArena();
@@ -32,9 +37,16 @@ const DynamicPricingHome = () => {
 
   return (
     <div className="arena-home-container">
-      {dynamicArenaList && dynamicArenaList.map((dynamicArena, index) => (
-      <DynamicArenaCard key={index} dynamicArenaData={dynamicArena} />
-      ))}
+      {dynamicArenaList && dynamicArenaList.length > 0 ? (
+        dynamicArenaList.map((dynamicArena, index) => (
+          <DynamicArenaCard key={index} dynamicArenaData={dynamicArena} />
+        ))
+      ) : (
+        <div className="no-arena-container">
+          <h2>No Dynamic Arena Pricing to show</h2>
+          <button onClick={handleAddDynamicPricingNow}>Add Now</button>
+        </div>
+      )}
     </div>
   );
 };

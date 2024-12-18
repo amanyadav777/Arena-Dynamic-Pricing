@@ -51,7 +51,11 @@ const UpdateArena = () => {
           console.error("Error creating arena:", error.response || error.message);
           toast.error(error.response.data.message || error.message);
         }
-    };
+  };
+  
+  const handleUpdateImage = () => {
+    toast.success("Feature Coming Soon!");
+  }
     
     
     useEffect(() => {
@@ -64,7 +68,7 @@ const UpdateArena = () => {
       mode="update"
       arenaData={existingArenaDetails}
       onSubmit={handleUpdateArena}
-    //   onUpdateImage={handleUpdateImage}
+      onUpdateImage={handleUpdateImage}
     />)
   );
 };
