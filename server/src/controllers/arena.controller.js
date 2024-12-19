@@ -141,7 +141,7 @@ const deleteArena = asyncHandler(async (req, res) => {
   // Respond with success message
   return res
     .status(200)
-    .json(new ApiResponse(200, "Arena deleted successfully"));
+    .json(new ApiResponse(200, {}, "Arena deleted successfully"));
 });
 
 const updateArenaImage = asyncHandler(async (req, res) => {
@@ -409,4 +409,5 @@ export {
   getAllArenas,
   orginalArenaDetails,
   getArenaDetails,
+  calculatePriceChange,
 };

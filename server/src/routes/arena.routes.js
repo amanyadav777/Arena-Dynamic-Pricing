@@ -20,7 +20,7 @@ router.route("/create-arena").post(
     },
   ]),
   createArena
-);
+); 
 
 router.route("/update-arena/:id").patch(updateArenaDetails);
 
